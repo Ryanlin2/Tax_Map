@@ -1,6 +1,6 @@
 import React from 'react';
 import { useChloroplethMap } from '../Hooks/useChloroplethMap';
-import statesData from './states.json';
+import statesData from './us-states.json';
 
 const randomizedGeoJson = {
   ...statesData,
