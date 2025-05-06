@@ -10,7 +10,7 @@ export function useChloroplethMap(geoJsonData, mapOptions = {}, colorScaleFunc) 
 
 const map = L.map('map', {
   center: mapOptions.center || [37.8, -96],
-  zoom: mapOptions.zoom || 4,
+  zoom: mapOptions.zoom || 5,
   ...mapOptions
 });
 
