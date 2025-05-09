@@ -86,18 +86,18 @@ def get_state_tax_info(df: pd.DataFrame, state_name: str) -> pd.DataFrame:
 app = Flask(__name__)
 CORS(app)
 
-@app.route("/api/state-tax", methods=["POST"])
+@app.route("/api/state-tax", methods=["GET"])
 def calculate_tax():
     try:
-        data = request.get_json()
-        state = data.get("state")
+        state = request.args.get("state")
         if not state:
-            return jsonify({"error": "Missing 'state' in request"}), 400
+            return jsonify({"error": "Missing 'state' query parameter"}), 400
 
         df = load_tax_data()
         result = get_state_tax_info(df, state)
         return jsonify(result.to_dict(orient="records"))
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
 
 
