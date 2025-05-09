@@ -1,0 +1,59 @@
+# === Python cache & environment ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+.Python
+env/
+venv/
+.venv/
+
+# === Jupyter Notebook checkpoints ===
+.ipynb_checkpoints/
+
+# === VSCode & IDE metadata ===
+.vscode/
+.idea/
+*.code-workspace
+
+# === OS junk ===
+.DS_Store
+Thumbs.db
+
+# === Logs and outputs ===
+*.log
+*.out
+
+# === Build artifacts ===
+build/
+dist/
+*.egg-info/
+
+# === Node (if React gets added later) ===
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# === Test & coverage artifacts ===
+htmlcov/
+.tox/
+.coverage
+.cache/
+pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+
+# === Secrets / config ===
+.env
+.env.*
+
+# === CSV or data dumps ===
+*.csv
+*.tsv
+*.db
+*.sqlite

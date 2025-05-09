@@ -1,5 +1,9 @@
 import pandas as pd
 from typing import Optional
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+from pathlib import Path
+
 
 # Mapping from full state names to abbreviated names in the dataset
 STATE_NAME_MAP = {
@@ -56,12 +60,13 @@ STATE_NAME_MAP = {
     'District of Columbia': 'D.C.'
 }
 
-def load_tax_data(csv_path: str) -> pd.DataFrame:
-    """
-    Load and preprocess the tax dataset from CSV.
-    Adds a 'state' column with normalized state names.
-    """
-    df = pd.read_csv(csv_path)
+# === Load CSV data path ===
+DATA_PATH = Path(__file__).parent / "state_income_tax_2025.csv"
+
+
+# === Core logic ===
+def load_tax_data():
+    df = pd.read_csv(DATA_PATH)
     df['state'] = (
         df['Unnamed: 0']
           .ffill()
@@ -71,19 +76,28 @@ def load_tax_data(csv_path: str) -> pd.DataFrame:
     return df
 
 def get_state_tax_info(df: pd.DataFrame, state_name: str) -> pd.DataFrame:
-    """
-    Return all tax rows for a given full state name.
-    """
     short_name = STATE_NAME_MAP.get(state_name)
     if not short_name:
         raise ValueError(f"Unknown state name: {state_name}")
-
     mask = df['state'].str.strip().str.lower() == short_name.lower()
     return df.loc[mask].reset_index(drop=True)
 
-def list_all_states() -> list:
-    """
-    Return a list of all available full state names.
-    """
-    return list(STATE_NAME_MAP.keys())
+# === Flask App ===
+app = Flask(__name__)
+CORS(app)
+
+@app.route("/api/state-tax", methods=["POST"])
+def calculate_tax():
+    try:
+        data = request.get_json()
+        state = data.get("state")
+        if not state:
+            return jsonify({"error": "Missing 'state' in request"}), 400
+
+        df = load_tax_data()
+        result = get_state_tax_info(df, state)
+        return jsonify(result.to_dict(orient="records"))
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 
