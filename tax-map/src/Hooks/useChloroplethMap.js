@@ -8,11 +8,11 @@ export function useChloroplethMap(geoJsonData, mapOptions = {}, colorScaleFunc) 
   useEffect(() => {
     if (mapRef.current) return;
 
-const map = L.map('map', {
-  center: mapOptions.center || [37.8, -96],
-  zoom: mapOptions.zoom || 5,
-  ...mapOptions
-});
+    const map = L.map('map', {
+      center: mapOptions.center || [37.8, -96],
+      zoom: mapOptions.zoom || 5,
+      ...mapOptions
+    });
 
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
