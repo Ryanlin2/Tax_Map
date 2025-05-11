@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+.state-label {
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  color: black;
+  pointer-events: none;
+  white-space: nowrap;
+}

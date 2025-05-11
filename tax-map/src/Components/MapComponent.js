@@ -7,14 +7,15 @@ const colorScale = value => {
   const v = parseFloat(value);
   if (isNaN(v)) return '#ccc';
 
-  if (v > 0.055) return '#800026'; // 5.5%+
-  if (v > 0.045) return '#BD0026'; // 4.5–5.5%
-  if (v > 0.035) return '#E31A1C'; // 3.5–4.5%
-  if (v > 0.025) return '#FC4E2A'; // 2.5–3.5%
-  if (v > 0.015) return '#FD8D3C'; // 1.5–2.5%
-  if (v > 0.005) return '#FEB24C'; // 0.5–1.5%
-  return '#FFEDA0';               // 0–0.5%
+  if (v > 0.055) return '#5e4fa2';  // deep purple
+  if (v > 0.045) return '#7b68b0';  // purple-blue
+  if (v > 0.035) return '#998ad2';  // soft lavender
+  if (v > 0.025) return '#b4add4';  // muted violet
+  if (v > 0.015) return '#cbd7e9';  // very light purple-blue
+  if (v > 0.005) return '#e0f3f8';  // pale light blue
+  return '#f7fcfd';                // almost white
 };
+
 
 
 export default function MapComponent() {
