@@ -30,15 +30,24 @@ export function useChloroplethMap(geoJsonData, mapOptions = {}, colorScaleFunc) 
       }),
     onEachFeature: (feature, layer) => {
       const name = feature.properties.name;
+      const taxValue = feature.properties.value;
+      const formattedTax = taxValue && !isNaN(parseFloat(taxValue))
+        ? `${(parseFloat(taxValue) * 100).toFixed(1)}%`
+        : 'N/A';
 
       layer.on('add', () => {
         const center = layer.getBounds().getCenter();
 
         const label = L.divIcon({
           className: 'state-label',
-          html: `<strong>${name}</strong>`,
-          iconSize: [100, 20],
-          iconAnchor: [50, 10]
+          html: `
+            <div class="label-wrapper">
+              <strong>${name}</strong><br />
+              <span class="tax-rate">${formattedTax}</span>
+            </div>
+          `,
+          iconSize: [120, 30],
+          iconAnchor: [60, 15]
         });
 
         const marker = L.marker(center, {
@@ -51,6 +60,8 @@ export function useChloroplethMap(geoJsonData, mapOptions = {}, colorScaleFunc) 
         layer.on('mouseout', () => marker.setOpacity(0.1));
       });
     }
+
+
     }).addTo(map);
 
     mapRef.current = map;
