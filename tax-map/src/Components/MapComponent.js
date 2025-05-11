@@ -22,9 +22,30 @@ export default function MapComponent() {
   useEffect(() => {
     if (!taxData) return;
 
+    const STATE_NAME_MAP = {
+      'Alabama': 'Ala.', 'Alaska': 'Alaska', 'Arizona': 'Ariz.', 'Arkansas': 'Ark.', 'California': 'Calif.',
+      'Colorado': 'Colo.', 'Connecticut': 'Conn.', 'Delaware': 'Del.', 'Florida': 'Fla.', 'Georgia': 'Ga.',
+      'Hawaii': 'Hawaii', 'Idaho': 'Idaho', 'Illinois': 'Ill.', 'Indiana': 'Ind.', 'Iowa': 'Iowa',
+      'Kansas': 'Kans.', 'Kentucky': 'Ky.', 'Louisiana': 'La.', 'Maine': 'Maine', 'Maryland': 'Md.',
+      'Massachusetts': 'Mass.', 'Michigan': 'Mich.', 'Minnesota': 'Minn.', 'Mississippi': 'Miss.',
+      'Missouri': 'Mo.', 'Montana': 'Mont.', 'Nebraska': 'Nebr.', 'Nevada': 'Nev.', 'New Hampshire': 'N.H.',
+      'New Jersey': 'N.J.', 'New Mexico': 'N.M.', 'New York': 'N.Y.', 'North Carolina': 'N.C.',
+      'North Dakota': 'N.D.', 'Ohio': 'Ohio', 'Oklahoma': 'Okla.', 'Oregon': 'Ore.', 'Pennsylvania': 'Pa.',
+      'Rhode Island': 'R.I.', 'South Carolina': 'S.C.', 'South Dakota': 'S.D.', 'Tennessee': 'Tenn.',
+      'Texas': 'Tex.', 'Utah': 'Utah', 'Vermont': 'Vt.', 'Virginia': 'Va.', 'Washington': 'Wash.',
+      'West Virginia': 'W.Va.', 'Wisconsin': 'Wis.', 'Wyoming': 'Wyo.', 'District of Columbia': 'D.C.'
+    };
+
+    const reverseMap = Object.fromEntries(
+      Object.entries(STATE_NAME_MAP).map(([full, abbr]) => [abbr, full])
+    );
+
     const taxMap = {};
     taxData.forEach(entry => {
-      taxMap[entry.state] = entry["Single Filer"];
+      const fullName = reverseMap[entry.state];
+      if (fullName) {
+        taxMap[fullName] = entry["Single Filer"];
+      }
     });
 
     const enriched = {
@@ -32,6 +53,12 @@ export default function MapComponent() {
       features: statesData.features.map(feature => {
         const stateName = feature.properties.name;
         const taxValue = taxMap[stateName] || null;
+
+        // Debug log for missing values
+        if (taxValue === null) {
+          console.warn(`Missing tax value for: ${stateName}`);
+        }
+
         return {
           ...feature,
           properties: {
@@ -44,6 +71,7 @@ export default function MapComponent() {
 
     setGeoJsonWithTax(enriched);
   }, [taxData]);
+
 
   useChloroplethMap(geoJsonWithTax, {}, colorScale);
 
