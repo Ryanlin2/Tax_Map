@@ -31,9 +31,13 @@ export function useChloroplethMap(geoJsonData, mapOptions = {}, colorScaleFunc) 
     onEachFeature: (feature, layer) => {
       const name = feature.properties.name;
       const taxValue = feature.properties.value;
-      const formattedTax = taxValue && !isNaN(parseFloat(taxValue))
-        ? `${(parseFloat(taxValue) * 100).toFixed(1)}%`
-        : 'N/A';
+      let formattedTax = 'N/A';
+        if (typeof taxValue === 'string') {
+          formattedTax = taxValue.toLowerCase() === 'none' ? 'N/A' : taxValue;
+        } else if (!isNaN(parseFloat(taxValue))) {
+          formattedTax = `${(parseFloat(taxValue) * 100).toFixed(1)}%`;
+}
+
 
       layer.on('add', () => {
         const center = layer.getBounds().getCenter();
