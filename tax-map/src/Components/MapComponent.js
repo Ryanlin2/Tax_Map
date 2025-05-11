@@ -5,16 +5,18 @@ import statesData from './us-states.json';
 
 const colorScale = value => {
   const v = parseFloat(value);
-  if (isNaN(v)) return '#ccc';
+  if (isNaN(v)) return '#FF4500'; // Orange-Red for N/A
 
-  if (v > 0.055) return '#5e4fa2';  // deep purple
-  if (v > 0.045) return '#7b68b0';  // purple-blue
-  if (v > 0.035) return '#998ad2';  // soft lavender
-  if (v > 0.025) return '#b4add4';  // muted violet
-  if (v > 0.015) return '#cbd7e9';  // very light purple-blue
-  if (v > 0.005) return '#e0f3f8';  // pale light blue
-  return '#f7fcfd';                // almost white
+  if (v > 0.055) return '#5e4fa2';   // deep purple
+  if (v > 0.045) return '#8073ac';
+  if (v > 0.035) return '#998ec3';
+  if (v > 0.025) return '#b2abd2';
+  if (v > 0.015) return '#c2cbe4';
+  if (v > 0.005) return '#e6f5f9';   // very light blue
+  return '#f7fcfd';                 // near-white blue
 };
+
+
 
 
 

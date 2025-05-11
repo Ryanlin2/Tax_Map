@@ -82,6 +82,9 @@ export function useChloroplethMap(geoJsonData, mapOptions = {}, colorScaleFunc) 
         );
       }
 
+      labels.push(`<i style="background:#FF4500"></i> N/A`);
+
+
       div.innerHTML = `
         <h4>Tax Rate</h4>
         ${labels.join('<br>')}
@@ -89,6 +92,7 @@ export function useChloroplethMap(geoJsonData, mapOptions = {}, colorScaleFunc) 
 
       return div;
     };
+
 
     legend.addTo(map);
 
