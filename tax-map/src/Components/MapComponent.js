@@ -1,32 +1,53 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useChloroplethMap } from '../Hooks/useChloroplethMap';
+import { useTaxRates } from '../Hooks/useTaxRates';
 import statesData from './us-states.json';
 
-const randomizedGeoJson = {
-  ...statesData,
-  features: statesData.features.map(feature => {
-    const randomValue = Math.floor(Math.random() * 101);
-    return {
-      ...feature,
-      properties: {
-        ...feature.properties,
-        value: randomValue
-      }
-    };
-  })
-};
-
 const colorScale = value => {
-  if (value > 90) return '#800026';
-  if (value > 75) return '#BD0026';
-  if (value > 60) return '#E31A1C';
-  if (value > 45) return '#FC4E2A';
-  if (value > 30) return '#FD8D3C';
-  if (value > 15) return '#FEB24C';
+  const v = parseFloat(value);
+  if (isNaN(v)) return '#ccc';
+  if (v > 8) return '#800026';
+  if (v > 6) return '#BD0026';
+  if (v > 4) return '#E31A1C';
+  if (v > 3) return '#FC4E2A';
+  if (v > 2) return '#FD8D3C';
+  if (v > 1) return '#FEB24C';
   return '#FFEDA0';
 };
 
 export default function MapComponent() {
-  useChloroplethMap(randomizedGeoJson, {}, colorScale);
-  return <div id="map" />;
+  const { data: taxData, loading } = useTaxRates();
+  const [geoJsonWithTax, setGeoJsonWithTax] = useState(null);
+
+  useEffect(() => {
+    if (!taxData) return;
+
+    const taxMap = {};
+    taxData.forEach(entry => {
+      taxMap[entry.state] = entry["Single Filer"];
+    });
+
+    const enriched = {
+      ...statesData,
+      features: statesData.features.map(feature => {
+        const stateName = feature.properties.name;
+        const taxValue = taxMap[stateName] || null;
+        return {
+          ...feature,
+          properties: {
+            ...feature.properties,
+            value: taxValue
+          }
+        };
+      })
+    };
+
+    setGeoJsonWithTax(enriched);
+  }, [taxData]);
+
+  useChloroplethMap(geoJsonWithTax, {}, colorScale);
+
+  if (loading) return <div>Loading tax data...</div>;
+  return <div id="map" style={{ height: "600px" }} />;
 }
+

@@ -101,3 +101,16 @@ def calculate_tax():
 
 
 
+@app.route("/api/all-single-filer-tax", methods=["GET"])
+def all_single_filer_tax():
+    try:
+        df = load_tax_data()
+        single_rates = (
+            df.groupby("state")["Single Filer"]
+            .first()
+            .reset_index()
+            .dropna()
+        )
+        return jsonify(single_rates.to_dict(orient="records"))
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500

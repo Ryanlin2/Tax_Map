@@ -6,14 +6,14 @@ export function useChloroplethMap(geoJsonData, mapOptions = {}, colorScaleFunc) 
   const mapRef = useRef(null);
 
   useEffect(() => {
-    if (mapRef.current) return;
+    const container = document.getElementById('map');
+    if (mapRef.current || !container || !geoJsonData) return;
 
-    const map = L.map('map', {
+    const map = L.map(container, {
       center: mapOptions.center || [37.8, -96],
       zoom: mapOptions.zoom || 5,
       ...mapOptions
     });
-
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors'
@@ -31,7 +31,7 @@ export function useChloroplethMap(geoJsonData, mapOptions = {}, colorScaleFunc) 
       onEachFeature: (feature, layer) => {
         const name = feature.properties.name;
         const value = feature.properties.value;
-        layer.bindPopup(`<b>${name}</b>: ${value}%`);
+        layer.bindPopup(`<b>${name}</b>: ${value ?? 'N/A'}%`);
       }
     }).addTo(map);
 
@@ -40,3 +40,4 @@ export function useChloroplethMap(geoJsonData, mapOptions = {}, colorScaleFunc) 
 
   return mapRef;
 }
+
