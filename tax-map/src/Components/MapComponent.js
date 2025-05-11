@@ -6,14 +6,16 @@ import statesData from './us-states.json';
 const colorScale = value => {
   const v = parseFloat(value);
   if (isNaN(v)) return '#ccc';
-  if (v > .8) return '#800026';
-  if (v >  .6) return '#BD0026';
-  if (v > .4) return '#E31A1C';
-  if (v > .3) return '#FC4E2A';
-  if (v > .2) return '#FD8D3C';
-  if (v > .1) return '#FEB24C';
-  return '#FFEDA0';
+
+  if (v > 0.055) return '#800026'; // 5.5%+
+  if (v > 0.045) return '#BD0026'; // 4.5–5.5%
+  if (v > 0.035) return '#E31A1C'; // 3.5–4.5%
+  if (v > 0.025) return '#FC4E2A'; // 2.5–3.5%
+  if (v > 0.015) return '#FD8D3C'; // 1.5–2.5%
+  if (v > 0.005) return '#FEB24C'; // 0.5–1.5%
+  return '#FFEDA0';               // 0–0.5%
 };
+
 
 export default function MapComponent() {
   const { data: taxData, loading } = useTaxRates();
