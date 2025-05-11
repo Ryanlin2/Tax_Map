@@ -44,16 +44,13 @@ export function useChloroplethMap(geoJsonData, mapOptions = {}, colorScaleFunc) 
         const marker = L.marker(center, {
           icon: label,
           interactive: false,
-          opacity: 0.1 // start faded
+          opacity: 0.1
         }).addTo(layer._map);
 
-        // Change opacity on hover
         layer.on('mouseover', () => marker.setOpacity(1));
         layer.on('mouseout', () => marker.setOpacity(0.1));
       });
     }
-
-
     }).addTo(map);
 
     mapRef.current = map;
