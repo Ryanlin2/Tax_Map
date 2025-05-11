@@ -65,6 +65,33 @@ export function useChloroplethMap(geoJsonData, mapOptions = {}, colorScaleFunc) 
     }).addTo(map);
 
     mapRef.current = map;
+    const legend = L.control({ position: 'bottomright' });
+
+    legend.onAdd = function () {
+      const div = L.DomUtil.create('div', 'info legend');
+
+      const grades = [0, 0.005, 0.015, 0.025, 0.035, 0.045, 0.055];
+      const labels = [];
+
+      for (let i = 0; i < grades.length; i++) {
+        const from = (grades[i] * 100).toFixed(1);
+        const to = grades[i + 1] ? (grades[i + 1] * 100).toFixed(1) : '+';
+
+        labels.push(
+          `<i style="background:${colorScaleFunc(grades[i])}"></i> ${from}${to !== '+' ? `&ndash;${to}` : '+'}%`
+        );
+      }
+
+      div.innerHTML = `
+        <h4>Tax Rate</h4>
+        ${labels.join('<br>')}
+      `;
+
+      return div;
+    };
+
+    legend.addTo(map);
+
   }, [geoJsonData, mapOptions, colorScaleFunc]);
 
   return mapRef;
