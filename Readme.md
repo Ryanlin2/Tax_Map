@@ -8,5 +8,8 @@ That is where Tax Map comes in!
 The first iteration of this project is to offer an interactive map that displays the state income tax rate of single filers. On hover it will display the tax rates of the state. 
 
 ## Technologies Utilized
-`Node.js` as the runtime environment, `React.js` with `Leaflet` for the frontend UI, and a `Flask` backend server to serve state tax data from a CSV.
+![image](https://github.com/user-attachments/assets/196d894f-5847-450b-9911-6fefc4b72686)
+
+`Node.js` as the runtime environment, `React.js` with `Leaflet` for the frontend UI, and a `Flask` backend server to serve state tax data from a CSV. The dataset I used was from Tax Foundation Organization [https://taxfoundation.org/data/all/state/state-income-tax-rates/].
+
 
