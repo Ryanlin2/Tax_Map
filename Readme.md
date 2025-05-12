@@ -39,17 +39,25 @@ From there, I was able to use the intuitive React Component Based Structure to s
 
 ## What I got Outof this experience
 I got in a rep for full stack development with node, react, and flask.
+
 I got experience wrangling data from a messy dataset.
+
 I got experience identifying and solving a problem with my own ideas and design decisions.
+
 I got to reflect on potential areas of improvment and trade offs in terms of implementation or just alternative ways of solving the same problem.
 
 ## Lessons Learned
 Problem solving isn't just solving a given problem, its more about identifying the proper / best way of interpreting the problem. 
+
 Be minimalistic, at first I wanted to use many technologies to make this a great application, but I should start with the main problems and solutions that need to be solved before choosing which technologies I want to use, and to reduce complexity use as little as possible and only expand when requirements exceed the scope of the capabiliies of the technologies in use.
 
 ## Potential Next Steps
 Federal, County, City level tax still need to be accounted for and presented.
+
 Sales, Property, and other taxes also should be accounted for, on all levels.
+
 Deployment potential using Docker and AWS for hosting.
+
 Agentic Monthly updates (Check if new dataset is released, if it is update the data)
+
 Smoother UI , nicer animations and styles.
