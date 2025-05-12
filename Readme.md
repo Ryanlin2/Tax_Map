@@ -1,4 +1,4 @@
-# Tax Map
+# Tax Map 🧾 
 Have you ever wanted to browse tax rates by location? Well there isn't a central place to just explore tax rates location by location. You would just find yourself googling 5 queries to figure out the total tax from Federal, State, County, and City. 
 That is where Tax Map comes in! 
 
