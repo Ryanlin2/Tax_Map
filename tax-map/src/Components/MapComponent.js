@@ -7,6 +7,7 @@ const colorScale = value => {
   const v = parseFloat(value);
   if (isNaN(v)) return '#FF4500'; // Orange-Red for N/A
 
+  if(v === 0) return '#FF4500';
   if (v > 0.055) return '#5e4fa2';   // deep purple
   if (v > 0.045) return '#8073ac';
   if (v > 0.035) return '#998ec3';
