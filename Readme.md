@@ -1,14 +1,10 @@
 # Tax Map
 ---
-An interactive map that displays tax information from a state, county, and city level.
+Have you ever wanted to browse tax rates by location? Well there isn't a central place to just explore location by location. You would just find yourself googling 5 queries to figure out the total tax from Federal, State, County, and City. 
+That is where Tax Map comes in! 
 
-## tax
----
-State Income Tax = ∑ (taxable income in each bracket × that bracket's rate)
+![image](https://github.com/user-attachments/assets/680e8288-248a-4b0c-916a-c36e2f62df4e)
 
 
-## Technologies used
----
-
-leaflet - map javascript api
+The first iteration of this project is to offer an interactive map that displays the state income tax rate of single filers. On hover it will display the tax rates of the state. 
 
