@@ -26,6 +26,30 @@ Then in Flask I created Queries to cache the wanted information, which was basic
 
 ![image](https://github.com/user-attachments/assets/d1f00fc9-d724-4917-9c6d-22cdedc63355)
 
-![image](https://github.com/user-attachments/assets/b416ef17-7074-4ff9-9267-e2607fbb235c) ![image](https://github.com/user-attachments/assets/8ee43aac-d599-4ecf-a603-20144c05a97f)
+![image](https://github.com/user-attachments/assets/b416ef17-7074-4ff9-9267-e2607fbb235c)
+
+which makes it queryable
+
+![image](https://github.com/user-attachments/assets/8ee43aac-d599-4ecf-a603-20144c05a97f)
+
+From there, I was able to use the intuitive React Component Based Structure to store the map components and its styles and the end result is a map that displays orange if the state level single filer tax is 0 and a heat map from light blue to dark purple from light taxing to heavy taxing. And to display it better I hid all the numbers and text until you hover over the location of interest.
 
 
+![image](https://github.com/user-attachments/assets/680e8288-248a-4b0c-916a-c36e2f62df4e)
+
+## What I got Outof this experience
+I got in a rep for full stack development with node, react, and flask.
+I got experience wrangling data from a messy dataset.
+I got experience identifying and solving a problem with my own ideas and design decisions.
+I got to reflect on potential areas of improvment and trade offs in terms of implementation or just alternative ways of solving the same problem.
+
+## Lessons Learned
+Problem solving isn't just solving a given problem, its more about identifying the proper / best way of interpreting the problem. 
+Be minimalistic, at first I wanted to use many technologies to make this a great application, but I should start with the main problems and solutions that need to be solved before choosing which technologies I want to use, and to reduce complexity use as little as possible and only expand when requirements exceed the scope of the capabiliies of the technologies in use.
+
+## Potential Next Steps
+Federal, County, City level tax still need to be accounted for and presented.
+Sales, Property, and other taxes also should be accounted for, on all levels.
+Deployment potential using Docker and AWS for hosting.
+Agentic Monthly updates (Check if new dataset is released, if it is update the data)
+Smoother UI , nicer animations and styles.
