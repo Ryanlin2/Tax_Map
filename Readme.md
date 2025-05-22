@@ -37,7 +37,7 @@ From there, I was able to use the intuitive React Component Based Structure to s
 
 ![image](https://github.com/user-attachments/assets/680e8288-248a-4b0c-916a-c36e2f62df4e)
 
-## What I got Outof this experience
+## What I got out of this experience
 I got in a rep for full stack development with node, react, and flask.
 
 I got experience wrangling data from a messy dataset.
